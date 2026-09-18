@@ -1,7 +1,6 @@
 export default {
   testEnvironment: 'node',
   transform: {},
-  extensionsToTreatAsEsm: ['.js'],
   moduleNameMapper: {
     '^(\\.{1,2}/.*)\\.js$': '$1'
   },
@@ -17,4 +16,3 @@ export default {
   verbose: true,
   testTimeout: 10000
 };
-

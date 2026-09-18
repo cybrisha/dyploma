@@ -4,7 +4,7 @@ import { usersAPI } from '../services/api';
 import './Profile.css';
 
 const Profile = () => {
-  const { user, updateUser } = useAuth();
+  const { user } = useAuth();
   const [oldPassword, setOldPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');

@@ -1,32 +1,40 @@
 import { Sequelize } from 'sequelize';
 import dotenv from 'dotenv';
 
-dotenv.config();
+dotenv.config({ quiet: true });
 
 /**
  * Database configuration using Sequelize ORM
  * Supports PostgreSQL, MySQL, and SQLite
  */
+const dialect = process.env.DB_DIALECT || 'postgres';
+
+const sequelizeOptions = {
+  host: process.env.DB_HOST || 'localhost',
+  port: process.env.DB_PORT || 5432,
+  dialect,
+  logging: process.env.NODE_ENV === 'development' ? console.log : false,
+  pool: {
+    max: 10,
+    min: 0,
+    acquire: 30000,
+    idle: 10000
+  },
+  define: {
+    timestamps: true,
+    underscored: true
+  }
+};
+
+if (dialect === 'sqlite') {
+  sequelizeOptions.storage = process.env.DB_STORAGE || './backend/dev.sqlite';
+}
+
 const sequelize = new Sequelize(
   process.env.DB_NAME || 'auth_system_db',
   process.env.DB_USER || 'postgres',
   process.env.DB_PASSWORD || 'postgres',
-  {
-    host: process.env.DB_HOST || 'localhost',
-    port: process.env.DB_PORT || 5432,
-    dialect: process.env.DB_DIALECT || 'postgres',
-    logging: process.env.NODE_ENV === 'development' ? console.log : false,
-    pool: {
-      max: 10,
-      min: 0,
-      acquire: 30000,
-      idle: 10000
-    },
-    define: {
-      timestamps: true,
-      underscored: true
-    }
-  }
+  sequelizeOptions
 );
 
 /**

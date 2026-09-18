@@ -30,7 +30,9 @@ const TwoFactorConfig = sequelize.define('TwoFactorConfig', {
     defaultValue: false
   },
   backupCodes: {
-    type: DataTypes.ARRAY(DataTypes.STRING),
+    type: sequelize.getDialect() === 'postgres'
+      ? DataTypes.ARRAY(DataTypes.STRING)
+      : DataTypes.JSON,
     allowNull: true,
     field: 'backup_codes'
   }

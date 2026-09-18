@@ -5,7 +5,7 @@ import TwoFactorConfig from '../models/TwoFactorConfig.js';
 import LogEntry from '../models/LogEntry.js';
 import '../models/index.js';
 
-dotenv.config();
+dotenv.config({ quiet: true });
 
 /**
  * Script to delete all users and their related configurations
