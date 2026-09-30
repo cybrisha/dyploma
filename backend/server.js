@@ -10,7 +10,7 @@ import { apiRateLimiter } from './middleware/rateLimiter.js';
 import './models/index.js'; // Initialize models
 
 // Load environment variables
-dotenv.config();
+dotenv.config({ quiet: true });
 
 const app = express();
 const PORT = process.env.PORT || 5000;

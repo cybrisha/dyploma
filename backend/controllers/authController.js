@@ -24,14 +24,14 @@ export const loginController = async (req, res) => {
     // Check validation errors
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).json({ 
+      return res.status(400).json({
         error: 'Validation failed',
         errors: errors.array()
       });
     }
 
     const { login: userLogin, password } = req.body;
-    const ipAddress = req.ip || req.connection.remoteAddress;
+    const ipAddress = req.ip || req.socket?.remoteAddress;
     const userAgent = req.get('user-agent');
 
     const result = await login(userLogin, password, ipAddress, userAgent);
@@ -117,7 +117,7 @@ export const refreshTokenController = async (req, res) => {
 export const logoutController = async (req, res) => {
   try {
     const userId = req.user?.id;
-    const ipAddress = req.ip || req.connection.remoteAddress;
+    const ipAddress = req.ip || req.socket?.remoteAddress;
     const userAgent = req.get('user-agent');
 
     if (userId) {
@@ -166,7 +166,7 @@ export const verify2FALoginController = async (req, res) => {
     }
 
     const { tempToken, token } = req.body;
-    const ipAddress = req.ip || req.connection.remoteAddress;
+    const ipAddress = req.ip || req.socket?.remoteAddress;
     const userAgent = req.get('user-agent');
 
     const result = await verify2FALogin(tempToken, token, ipAddress, userAgent);

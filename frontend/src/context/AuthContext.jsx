@@ -23,7 +23,7 @@ export const AuthProvider = ({ children }) => {
         try {
           const response = await authAPI.getCurrentUser();
           setUser(response.data.user);
-        } catch (error) {
+        } catch {
           // Token invalid, clear it
           localStorage.removeItem('accessToken');
           setToken(null);
@@ -102,7 +102,7 @@ export const AuthProvider = ({ children }) => {
       localStorage.setItem('accessToken', accessToken);
       setToken(accessToken);
       return true;
-    } catch (error) {
+    } catch {
       logout();
       return false;
     }

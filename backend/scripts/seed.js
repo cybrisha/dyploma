@@ -4,7 +4,7 @@ import User from '../models/User.js';
 import Role from '../models/Role.js';
 import '../models/index.js';
 
-dotenv.config();
+dotenv.config({ quiet: true });
 
 /**
  * Seed script to populate database with initial data

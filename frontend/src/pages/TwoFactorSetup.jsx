@@ -70,7 +70,7 @@ const TwoFactorSetup = () => {
       try {
         const response = await twoFactorAPI.getStatus();
         setIs2FAEnabled(response.data.enabled);
-      } catch (err) {
+      } catch {
         // If status check fails, assume 2FA is not enabled
         setIs2FAEnabled(false);
       } finally {
